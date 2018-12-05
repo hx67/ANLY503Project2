@@ -1,0 +1,51 @@
+artist,count,median peak,mean total weeks,sentiment,Gender,State,City
+Glee Cast,206,61,0.402912621,0.5,B,,
+Drake,187,42,11.04761905,0.571428571,M,ON,Toronto
+Lil Wayne,141,41.5,10.65277778,0.714285714,M,LA,New Orleans
+Nicki Minaj,96,38,12.42424242,0.6,W,NY,New York City
+Chris Brown,81,43,15.08433735,0.666666667,M,VA,Tappahannock
+Taylor Swift,75,18.5,12.97368421,0.65,W,PA,Reading
+Future,71,55,9.930555556,0.5,M,GA,Atlanta
+Justin Bieber,69,34,9.185714286,0.583333333,M,ON,Stratford
+Kanye West,68,36,10,0.8,M,GA,Atlanta
+Rihanna,52,14,21.07407407,0.590909091,W,Barbados,Saint Michael Parish
+Eminem,52,26,6.269230769,0.75,M,MO,Joseph
+The Weeknd,51,48,9.882352941,0.833333333,M,ON,Toronto
+Kendrick Lamar,45,36,10.36956522,0.8,M,CA,Compton
+Beyonce,43,37,12.86046512,0.714285714,W,TX,Houston
+Big Sean,40,66.5,10.61904762,0.5,M,CA,Santa Monica
+Rick Ross,39,58,11.30952381,1,M,MS,Clarksdale
+J. Cole,39,30,7.41025641,0.25,M,Germany,Frankfurt
+T-Pain,37,38.5,13.81578947,0.75,M,FL,Tallahassee
+Pitbull,37,30,16.68421053,0.625,M,FL,Miami
+Travis Scott,36,42,6.447368421,0.75,M,TX,Houston
+T.I.,35,50,10.86486486,0.6,M,GA,Atlanta
+2 Chainz,35,53,13.05555556,0,M,GA,College Park
+Wiz Khalifa,34,56,11.85714286,0.6,M,ND,Minot
+Ariana Grande,34,46,9.294117647,0.888888889,W,FL,Boca Raton
+Usher,33,32,16.6969697,0.666666667,M,TX,Dallas
+Trey Songz,32,55.5,14.8125,0.5,M,VA,Petersburg
+Migos,32,63,8.53125,0.75,B,GA,Lawrenceville
+Flo Rida,29,25,15.72413793,0.636363636,M,FL,Carol City
+Blake Shelton,29,43,16.03448276,,M,OK,Ada
+Meek Mill,29,79,3.896551724,,M,PA,Philadelphia
+One Direction,29,54,9.206896552,1,B,United Kindom and the North Ireland,London
+Ed Sheeran,29,42,14.82758621,0.833333333,M,United Kindom and the North Ireland,London
+Katy Perry,28,10,20.10714286,0.571428571,W,CA,Santa Barbara
+Kenny Chesney,27,46.5,15.82142857,,M,TN,Knoxville
+Jason Aldean,27,40,17.55555556,0,M,TN,Nashville
+Demi Lovato,27,43,12.11111111,0.75,W,NM,Albuquerque
+Luke Bryan,27,37,18.11111111,,M,TN,Nashville
+Lady Gaga,27,10,14.88888889,0.714285714,W,NY,New York City
+Young Thug,27,71.5,8.035714286,0,M,GA,Atlanta
+Carrie Underwood,26,28,17.15384615,1,W,OK,Checotah
+Post Malone,26,23.5,12,0.75,M,NY,Syracuse
+DJ Khaled,25,51,11.25925926,1,M,LA,New Orleans
+Keith Urban,25,49.5,16.65384615,,M,New Zealand,Northland
+Maroon 5,24,15,20.54166667,0.818181818,B,CA,Los Angeles
+Lil Uzi Vert,24,65.5,9.5,0.5,M,PA,Philadelphia
+Miley Cyrus,23,21,12.39130435,0.625,W,TN,Franklin
+Tim McGraw,23,52,13.30434783,,M,LA,Lousiana
+Selena Gomez,23,22,16.24,0.166666667,W,TX,Grand Prairie
+Gucci Mane,22,51,11.52,0,M,AL,Bessemer
+Ne-Yo,22,19,18.95454545,0.5,M,AR,Camden
