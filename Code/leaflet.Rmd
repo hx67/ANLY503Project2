@@ -1,0 +1,50 @@
+
+```{r}
+library(tigris)
+library(dplyr)
+library(sp)
+library(sf)
+library(maps)
+library(maptools)
+library(leaflet)
+library(rgdal)
+library(openintro)
+library(raster)
+library(htmlwidgets)
+library(viridis)
+library(data.table)
+
+new50_df <- fread('new50.csv')
+
+new50_df <- new50_df %>% group_by(State) %>% mutate(Artist_num=length(unique(artist)))
+states = states(cb = FALSE, resolution = "500k", year = 2017)
+
+```
+
+```{r}
+# Now we use the Tigris function geo_join to bring together 
+# the states shapefile and the sb_states dataframe -- STUSPS and state 
+# are the two columns they'll be joined by
+
+states_merged_artist <- geo_join(states, new50_df, "STUSPS", "State", how = 'left')
+
+
+mybins=seq(0, max(new50_df$Artist_num), by = 1)
+mypalette = colorBin( palette="YlOrBr", domain=states_merged_artist$Artist_num, na.color="transparent", bins=mybins)
+
+mytext=paste("State: ", states_merged_artist$STUSPS,"<br/>", "Artist number: ", states_merged_artist$Artist_num, "<br/>", sep="") %>%
+  lapply(htmltools::HTML)
+
+m <- leaflet(states_merged_artist) %>%
+  addTiles()  %>%
+  setView( lat=-77.07, lng=38.9 , zoom=2) %>%
+  addPolygons(
+     fillColor = ~mypalette(Artist_num), stroke=TRUE, fillOpacity = 0.9, color="white",  label = mytext,
+    labelOptions = labelOptions( style = list("font-weight" = "normal", padding = "3px 8px"), textsize = "13px", direction = "auto")) %>% addLegend( pal=mypalette, values=~Artist_num, group = 'percentage of alcohol drinker', opacity=0.9, title = "number of artists", position = "bottomleft")
+
+#mapState <- merge(mapStates, new50_df, by.x = 'names', by.y = 'State' )
+
+
+saveWidget(m, file= "leaflet_artist_distrib.html")
+```
+
