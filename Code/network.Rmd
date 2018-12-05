@@ -1,0 +1,64 @@
+---
+title: "network"
+output: html_document
+---
+
+```{r}
+library(networkD3)
+library(htmlwidgets)
+```
+
+
+
+```{r}
+df = read.csv("~/Desktop/out.csv")
+```
+
+```{r}
+df = df[order(-df$frea),] 
+colnames(df) = c("index", "value", "source", "target")
+
+```
+
+```{r}
+df = head(df, 250)
+```
+
+```{r}
+sources = df$source 
+targets = df$target
+nodes = c(as.character(sources), as.character(targets))
+```
+
+```{r}
+t = table(nodes)
+nodes = as.data.frame(t)
+```
+```{r}
+nodes$index = c(0:157)
+colnames(nodes) = c('name', 'size', 'index')
+```
+
+```{r}
+library(plyr)
+
+df$source = mapvalues(df$source, from = nodes$name, to = nodes$index)
+df$target = mapvalues(df$target, from = nodes$name, to = nodes$index)
+
+
+
+```
+
+
+Below is a network showing the most common bigrams in the lyrics throughout the years
+
+```{r}
+p = forceNetwork(Links = df, Nodes = nodes,
+            Source = "source", Target = "target", Group = "index",
+            Value = "value", NodeID = "name", opacity = 0.8, fontSize = 30)
+```
+
+```{r}
+htmlwidgets::saveWidget(as_widget(p), "network.html")
+```
+
