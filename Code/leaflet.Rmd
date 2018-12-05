@@ -14,7 +14,7 @@ library(htmlwidgets)
 library(viridis)
 library(data.table)
 
-new50_df <- fread('new50.csv')
+new50_df <- fread('../Data/new50.csv')
 
 new50_df <- new50_df %>% group_by(State) %>% mutate(Artist_num=length(unique(artist)))
 states = states(cb = FALSE, resolution = "500k", year = 2017)
@@ -37,7 +37,7 @@ mytext=paste("State: ", states_merged_artist$STUSPS,"<br/>", "Artist number: ", 
 
 m <- leaflet(states_merged_artist) %>%
   addTiles()  %>%
-  setView( lat=-77.07, lng=38.9 , zoom=2) %>%
+  setView( lat=38.9, lng=-77.07 , zoom=2) %>%
   addPolygons(
      fillColor = ~mypalette(Artist_num), stroke=TRUE, fillOpacity = 0.9, color="white",  label = mytext,
     labelOptions = labelOptions( style = list("font-weight" = "normal", padding = "3px 8px"), textsize = "13px", direction = "auto")) %>% addLegend( pal=mypalette, values=~Artist_num, group = 'percentage of alcohol drinker', opacity=0.9, title = "number of artists", position = "bottomleft")
@@ -45,6 +45,6 @@ m <- leaflet(states_merged_artist) %>%
 #mapState <- merge(mapStates, new50_df, by.x = 'names', by.y = 'State' )
 
 
-saveWidget(m, file= "leaflet_artist_distrib.html")
+saveWidget(m, file= "leaflet.html")
 ```
 
