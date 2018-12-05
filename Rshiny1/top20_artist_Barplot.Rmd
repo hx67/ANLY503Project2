@@ -1,0 +1,93 @@
+---
+output: html_document
+runtime: shiny
+---
+
+
+```{r setup, include=FALSE, echo= FALSE}
+library(shiny)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+require(data.table)
+library(tidyverse)
+library(DT)
+rsconnect::setAccountInfo(name='tianjingcai95',
+			  token='886DF70418F9AA110765C3D4A9B2A06D',
+			  secret='YULeS4CRLriMmMfpT/F3f8cL04S7iOWs0A+fM/uA')
+```
+
+
+
+```{r echo= FALSE}
+top20_df <- fread('top20.csv')
+setnames(top20_df, c('Artist', 'Count', "Median peak", "Mean total weeks", 'Overall sentiment score'))
+
+top20_df <- top20_df[Artist != 'Glee Cast',]
+
+top20_df <- top20_df[1:(nrow(top20_df)-1),] # remove last row of dataframe loaded
+
+# preprocess data
+top20_df$`Median peak` = sapply(top20_df$`Median peak`, function(x){round(x, 1)})
+top20_df$`Mean total weeks` = sapply(top20_df$`Mean total weeks`, function(x){round(x, 1)})
+
+top20_df$`Overall sentiment score` = sapply(top20_df$`Overall sentiment score`, function(x){round(x, 2)})
+```
+
+```{r  echo=FALSE}
+
+# Define UI for application that plots features of movies
+ui <- fluidPage(
+  titlePanel("Billboard top 20 artists' performance"),
+  br(),
+  # Sidebar layout with a input and output definitions
+  sidebarLayout(
+
+    # Inputs
+    sidebarPanel(
+
+      # Select variable for y-axis
+      selectInput(inputId = "y",
+                  label = "Y-axis:",
+                  choices = c("Count" , 
+                              "Median peak" , 
+                              "Mean total weeks", 
+                              "Overall sentiment score" ),
+                  selected = "Count"),
+
+      # Select variable for x-axis
+      selectInput(inputId = "x",
+                  label = "X-axis:",
+                  choices = c("Artist"),
+                  selected =  "Artist")
+    ),
+
+    # Outputs
+    mainPanel(
+      plotOutput(outputId = "histogram")
+    )
+  )
+)
+
+# Define server function required to create the scatterplot
+server <- function(input, output) {
+
+  # Create scatterplot
+  output$histogram <- renderPlot({
+    ggplot(data = top20_df, aes_string(x = input$x, y = as.name(input$y))) +
+      geom_bar(position = "dodge", stat = "identity", aes(fill = input$x)) + coord_flip() + ggtitle("Histogram showing top 20 Billboard artists' performance")
+  })
+
+
+
+
+}
+
+# Create the Shiny app object
+shinyApp(ui = ui, server = server)
+```
+
+#### The R shiny app above provides us an illustration of artists' performance on Billboard evaluated under different metrics. Artists Lil Wayne and Drake have way more songs than other artists nominated on Billboard. On the other hand, our team measure the best rank in history for each of artist's song and we order those ranks and find the median. This metric measures artists overall influence since they began their career. 
+
+#### From the barplot, we could see almost all artists got half their songs achieve top 20 rank on Billboard, which is an amazing achievement. Also, almost all of them have their songs nominated on Billboard more than 5 weeks long. Besides, almost all artists optimistic and delightful information which could be seen from overall sentiment score.
+
